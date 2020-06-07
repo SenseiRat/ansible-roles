@@ -1,0 +1,33 @@
+---
+# tasks file for arc.ansible_config
+- name: Create the user for the ansible service
+  user:
+    name: "{{ ansible_user }}"
+    state: present
+    shell: /bin/bash
+    groups: "{{ ansible_groups }}"
+    append: true
+
+- name: Create the .ssh directory
+  file:
+    path: "/home/{{ ansible_user }}/.ssh"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    directory_mode: '0700'
+
+- name: Ensure authorized_keys file exists for user
+  copy:
+    src: ansible_authorized_keys
+    dest: "/home/{{ ansible_user }}/.ssh/authorized_keys"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0600'
+    force: true
+
+- name: Ensure user exists in the sudeors file
+  lineinfile:
+    path: /etc/sudoers
+    create: true
+    line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    validate: /usr/sbin/visudo -cf %s

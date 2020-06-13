@@ -9,6 +9,7 @@
   user:
     name: "{{ service_user }}"
     state: present
+    system: true
     shell: /bin/bash
     create_home: true
     home: "/home/{{ service_user }}"

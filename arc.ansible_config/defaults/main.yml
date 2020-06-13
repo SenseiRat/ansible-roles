@@ -1,5 +1,3 @@
 ---
 # defaults file for arc.ansible_config
-ansible_user: ansible
-ansible_groups:
-  - docker
+service_user: 'ansible'

@@ -4,6 +4,5 @@
   tasks:
     - name: Test connection
       ping:
-    - name: Run arc.ansible_config role
-      include_role:
-        name: arc.ansible_config
+  roles:
+    - {role: arc.ansible_config, become: true}

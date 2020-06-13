@@ -1,13 +1,11 @@
 ---
 # tasks file for arc.ansible_config
 - name: Create the group for the ansible service user
-  become: true
   group:
     name: "{{ service_user }}"
     state: present
 
 - name: Create the user for the ansible service
-  become: true
   user:
     name: "{{ service_user }}"
     state: present
@@ -17,7 +15,6 @@
     group: "{{ service_user }}"
 
 - name: Create the .ssh directory
-  become: true
   file:
     path: "/home/{{ service_user }}/.ssh"
     state: directory
@@ -26,7 +23,6 @@
     directory_mode: '0700'
 
 - name: Ensure authorized_keys file exists for user
-  become: true
   copy:
     src: ansible_authorized_keys
     dest: "/home/{{ service_user }}/.ssh/authorized_keys"
@@ -36,7 +32,6 @@
     force: true
 
 - name: Ensure user exists in the sudeors file
-  become: true
   lineinfile:
     path: /etc/sudoers
     create: true

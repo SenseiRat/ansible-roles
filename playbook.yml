@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: true
+  tasks:
+    - name: Test connection
+      ping:
+    - name: Run arc.ansible_config role
+      include_role:
+        name: arc.ansible_config

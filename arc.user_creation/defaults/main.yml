@@ -7,4 +7,5 @@ sudo_group: "{{ 'sudo' if
                  ansible_distribution == 'Ubuntu'
                  else 'wheel'}}"
 admin_groups:
+  - "{{ admin_user }}"
   - "{{ sudo_group }}"

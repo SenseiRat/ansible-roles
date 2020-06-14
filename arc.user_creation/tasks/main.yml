@@ -46,7 +46,20 @@
     owner: "{{ admin_user }}"
     group: "{{ admin_user }}"
     mode: '0644'
+    force: true
   loop:
     - {src: '.bashrc', dest: '.bashrc'}
     - {src: '.bash_aliases', dest: '.bash_aliases'}
     - {src: '.bash_logout', dest: '.bash_logout'}
+
+- name: Create symlinks for home directory
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+    force: true
+  loop:
+    - {src: '/media/sean/Storage/Books', dest: "{{ admin_home }}/Books"}
+    - {src: '/media/sean/Storage/Music', dest: "{{ admin_home }}/Music"}
+    - {src: '/media/sean/Storage/Pictures', dest: "{{ admin_home }}/Pictures"}
+    - {src: '/media/sean/Storage/Video', dest: "{{ admin_home }}/Video"}

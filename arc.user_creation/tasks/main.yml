@@ -9,7 +9,7 @@
   user:
     name: "{{ admin_user }}"
     state: present
-    shell: /bin/bash
+    shell: '/bin/bash'
     create_home: true
     password: "{{ admin_password | password_hash('sha512') }}
     update_password: always

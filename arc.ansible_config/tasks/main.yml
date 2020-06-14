@@ -15,6 +15,11 @@
     home: "/home/{{ service_user }}"
     group: "{{ service_user }}"
 
+- name: Ensure permissions on home directory are correctly set
+  file:
+    path: "/home/{{ service user }}"
+    mode: '0700'
+
 - name: Create the .ssh directory
   file:
     path: "/home/{{ service_user }}/.ssh"

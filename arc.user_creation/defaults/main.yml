@@ -1,2 +1,10 @@
 ---
 # defaults file for arc.user_creation
+admin_user: 'sean'
+admin_password: 'asdfb'
+sudo_group: "{{ 'sudo' if
+                 ansible_distribution == 'Debian' or
+                 ansible_distribution == 'Ubuntu'
+                 else 'wheel'}}"
+admin_groups:
+  - "{{ sudo_group }}"

@@ -9,3 +9,4 @@ sudo_group: "{{ 'sudo' if
 admin_groups:
   - "{{ admin_user }}"
   - "{{ sudo_group }}"
+admin_home: "/home/{{ admin_user }}"

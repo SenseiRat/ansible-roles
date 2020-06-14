@@ -13,7 +13,7 @@
     create_home: true
     password: "{{ admin_password | password_hash('sha512') }}"
     update_password: always
-    home: "/home/{{ admin_user }}"
+    home: "{{ admin_home }}"
     groups: "{{ admin_groups }}"
     append: true
 
@@ -24,7 +24,7 @@
 
 - name: Create the .ssh directory
   file:
-    path: "/home/{{ admin_user }}/.ssh"
+    path: "{{ admin_home }}/.ssh"
     state: directory
     owner: "{{ admin_user }}"
     group: "{{ admin_user }}"
@@ -33,8 +33,20 @@
 - name: Ensure authorized_keys file exists for user
   copy:
     src: admin_authorized_keys
-    dest: "/home/{{ admin_user }}/.ssh/authorized_keys"
+    dest: "{{ admin_home }}/.ssh/authorized_keys"
     owner: "{{ admin_user }}"
     group: "{{ admin_user }}"
     mode: '0600'
     force: true
+
+- name: Deploy bash configuration files for user
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ admin_home }}/{{ item.dest }}"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: '0644'
+  loop:
+    - {src: '.bashrc', dest: '.bashrc'}
+    - {src: '.bash_aliases', dest: '.bash_aliases'}
+    - {src: '.bash_logout', dest: '.bash_logout'}

@@ -63,3 +63,4 @@
     - {src: '/media/sean/Storage/Music', dest: "{{ admin_home }}/Music"}
     - {src: '/media/sean/Storage/Pictures', dest: "{{ admin_home }}/Pictures"}
     - {src: '/media/sean/Storage/Video', dest: "{{ admin_home }}/Video"}
+  when: ansible_hostname == 'nephilim'

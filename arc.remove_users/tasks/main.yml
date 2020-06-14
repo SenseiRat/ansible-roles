@@ -1,0 +1,6 @@
+---
+# tasks file for arc.remove_users
+- name: Remove old or default users
+  user:
+    name: "{{ users }}"
+    state: absent

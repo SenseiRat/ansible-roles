@@ -1,0 +1,4 @@
+---
+# defaults file for arc.remove_users
+users:
+  - 'pi'

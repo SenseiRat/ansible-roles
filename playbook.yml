@@ -6,4 +6,5 @@
       ping:
   roles:
     #- {role: arc.ansible_config, become: true}
-    - {role: arc.user_creation, become: true}
+    #- {role: arc.user_creation, become: true}
+    - {role: arc.remove_users, become: true}

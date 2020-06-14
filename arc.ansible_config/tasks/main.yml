@@ -17,7 +17,7 @@
 
 - name: Ensure permissions on home directory are correctly set
   file:
-    path: "/home/{{ service user }}"
+    path: "/home/{{ service_user }}"
     mode: '0700'
 
 - name: Create the .ssh directory

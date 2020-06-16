@@ -1,0 +1,36 @@
+---
+# tasks file for arc.git
+- name: Install git on yum systems
+  yum:
+    name: git
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Install git on dnf systems
+  dnf:
+    name: git
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'dnf'
+
+- name: Install git on apt systems
+  apt:
+    name: git
+    state: latest
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Install git on pacman systems
+  pacman:
+    name: git
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'
+
+- name: Configure git for admin user
+  copy:
+    src: '.gitconfig'
+    dest: "/home/{{ admin_user }}/.gitconfig"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: '0644'

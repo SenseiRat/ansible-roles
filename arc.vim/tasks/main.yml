@@ -1,0 +1,53 @@
+---
+# tasks file for arc.vim
+- name: Install vim on yum systems
+  yum:
+    name: vim-enhanced
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Install vim on dnf systems
+  dnf:
+    name: vim-enhanced
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'dnf'
+
+- name: Install vim on apt systems
+  apt:
+    name: vim
+    state: latest
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Install vim on pacman systems
+  pacman:
+    name: vim
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'
+
+- name: Make sure .vim directory is created
+  file:
+    path: "/home/{{ admin_user }}/.vim"
+    state: directory
+
+- name: Install Vundle
+  git:
+    repo: 'https://github.com/VundleVim/Vundle.vim.git'
+    dest: "/home/{{ admin_user }}/.vim/bundle/Vundle.vim"
+    clone: true
+    update: true
+
+- name: Ensure vim is configured correctly
+  copy:
+    src: '.vimrc'
+    dest: "/home/{{ admin_user }}/.vimrc"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: '0644'
+
+- name: Install plugins
+  become: true
+  become_user: "{{ admin_user }}"
+  command: "vim +PluginInstall +qall"

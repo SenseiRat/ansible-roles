@@ -31,6 +31,8 @@
   file:
     path: "/home/{{ admin_user }}/.vim"
     state: directory
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
 
 - name: Install Vundle
   git:
@@ -38,6 +40,13 @@
     dest: "/home/{{ admin_user }}/.vim/bundle/Vundle.vim"
     clone: true
     update: true
+
+- name: Ensure all vim directories have correct permissions
+  file:
+    path: "/home/{{ admin_user }}/.vim"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    recurse: true
 
 - name: Ensure vim is configured correctly
   copy:
@@ -51,3 +60,4 @@
   become: true
   become_user: "{{ admin_user }}"
   command: "vim +PluginInstall +qall"
+  when: ansible_distribution != "Debian"

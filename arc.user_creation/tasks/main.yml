@@ -48,7 +48,6 @@
     mode: '0644'
     force: true
   loop:
-    - {src: '.bashrc', dest: '.bashrc'}
     - {src: '.bash_aliases', dest: '.bash_aliases'}
     - {src: '.bash_logout', dest: '.bash_logout'}
 

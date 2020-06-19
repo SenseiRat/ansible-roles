@@ -1,0 +1,6 @@
+---
+# defaults file for arc.bash_it
+admin_user: 'sean'
+bi_path: "/home/{{ admin_user }}/.bash_it/"
+bash_it_theme: 'luan'
+git_hosting: 'git@git.senseirat.com'

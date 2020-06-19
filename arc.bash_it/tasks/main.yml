@@ -1,0 +1,211 @@
+---
+# tasks file for arc.bash_it
+- name: Download bash-it
+  git:
+    repo: 'https://github.com/Bash-it/bash-it.git'
+    dest: "{{ bi_path }}"
+    clone: true
+    update: true
+    depth: 1
+
+- name: Set permissions on bash_it directory
+  file:
+    path: "{{ bi_path }}"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    recurse: true
+
+- name: Install bash_it for the user
+  become: true
+  become_user: "{{ admin_user }}"
+  shell: "{{ bi_path }}install.sh --silent"
+  when: ansible_distribution != "Debian"
+
+- name: Ensure enabled directory exists before linking addons
+  file:
+    path: "{{ bi_path }}enabled"
+    state: directory
+
+- name: Enable bash_it addons for all systems
+  file:
+    src: "{{ item.path }}{{ item.src }}"
+    dest: "{{ link_path }}{{ item.priority }}---{{ item.src }}"
+    state: link
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+  vars:
+    link_path: "{{ bi_path }}enabled/"
+  loop:
+    # Aliases
+    - {path: "{{ bi_path }}aliases/available/",
+       src: "ansible.aliases.bash",
+       priority: "150"}
+    #- {path: "{{ bi_path }}aliases/available/",
+    #   src: "apt.aliases.bash",
+    #   priority: "150"}
+    - {path: "{{ bi_path }}aliases/available/",
+       src: "bash-it.aliases.bash",
+       priority: "150"}
+    - {path: "{{ bi_path }}aliases/available/",
+       src: "curl.aliases.bash",
+       priority: "150"}
+    - {path: "{{ bi_path }}aliases/available/",
+       src: "docker-compose.aliases.bash",
+       priority: "150"}
+    - {path: "{{ bi_path }}aliases/available/",
+       src: "docker.aliases.bash",
+       priority: "150"}
+    - {path: "{{ bi_path }}aliases/available/",
+       src: "fuck.aliases.bash",
+       priority: "150"}
+    - {path: "{{ bi_path }}aliases/available/",
+       src: "general.aliases.bash",
+       priority: "150"}
+    #- {path: "{{ bi_path }}aliases/available/",
+    #   src: "git.aliases.bash",
+    #   priority: "150"}
+    - {path: "{{ bi_path }}aliases/available/",
+       src: "systemd.aliases.bash",
+       priority: "150"}
+    - {path: "{{ bi_path }}aliases/available/",
+       src: "tmux.aliases.bash",
+       priority: "150"}
+    - {path: "{{ bi_path }}aliases/available/",
+       src: "vim.aliases.bash",
+       priority: "150"}
+    # Plugins
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "alias-completion.plugin.bash",
+       priority: "365"}
+    #- {path: "{{ bi_path }}plugins/available/",
+    #   src: "aws.plugin.bash",
+    #   priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "base.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "dirs.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "docker-compose.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "docker-machine.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "docker.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "edit-mode-vi.plugin.bash",
+       priority: "250"}
+    #- {path: "{{ bi_path }}plugins/available/",
+    #   src: "git-subrepo.plugin.bash",
+    #   priority: "250"}
+    #- {path: "{{ bi_path }}plugins/available/",
+    #   src: "git.plugin.bash",
+    #   priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "go.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "goenv.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "history.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "man.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "nginx.plugin.bash",
+       priority: "250"}
+    #- {path: "{{ bi_path }}plugins/available/",
+    #   src: "pyenv.plugin.bash",
+    #   priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "python.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "ssh.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "sudo.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "thefuck.plugin.bash",
+       priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "tmux.plugin.bash",
+       priority: "250"}
+    #- {path: "{{ bi_path }}plugins/available/",
+    #   src: "virtualenv.plugin.bash",
+    #   priority: "250"}
+    - {path: "{{ bi_path }}plugins/available/",
+       src: "xterm.plugin.bash",
+       priority: "250"}
+    # Completion
+    #- {path: "{{ bi_path }}completion/available/",
+    #   src: "awscli.completion.bash",
+    #   priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "bash-it.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "defaults.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "dirs.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "docker-compose.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "docker-machine.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "docker.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "gcloud.completion.bash",
+       priority: "350"}
+    #- {path: "{{ bi_path }}completion/available/",
+    #   src: "git.completion.bash",
+    #   priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "go.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "makefile.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "pip.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "pip3.completion.bash",
+       priority: "350"}
+    #- {path: "{{ bi_path }}completion/available/",
+    #   src: "pipenv.completion.bash",
+    #   priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "ssh.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "system.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "terraform.completion.bash",
+       priority: "350"}
+    - {path: "{{ bi_path }}completion/available/",
+       src: "tmux.completion.bash",
+       priority: "350"}
+
+- name: Add custom values to .bashrc
+  lineinfile:
+    path: "/home/{{ admin_user }}/.bashrc"
+    regexp: "{{ item.regex }}"
+    line: "{{ item.line }}"
+  loop:
+    - {regex: "^export BASH_IT_THEME=.*",
+       line: "export BASH_IT_THEME='{{ bash_it_theme }}'"}
+    - {regex: "^export GIT_HOSTING=.*",
+       line: "export GIT_HOSTING='{{ git_hosting }}'"}

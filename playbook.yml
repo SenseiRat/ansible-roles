@@ -10,3 +10,4 @@
     - {role: arc.remove_users, become: true}
     - {role: arc.git, become: true}
     - {role: arc.vim, become: true}
+    - {role: arc.bash_it, become: true}

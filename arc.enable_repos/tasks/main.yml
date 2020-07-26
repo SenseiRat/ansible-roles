@@ -1,0 +1,33 @@
+---
+# tasks file for arc.enable_repos
+- name: Enable EPEL repo on yum systems
+  yum:
+    name: epel-release
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Enable EPEL repo on dnf systems
+  dnf:
+    name: epel-release
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'dnf'
+
+- name: Enable repos on pacman systems
+  lineinfile:
+    insertafter: "{{ item.after }}"
+    line: "{{ item.line }}"
+  loop:
+    - {after: '[multilib]',
+       line: 'Include = /etc/pacman.d/mirrorlist'}
+    #- {after: '[community-testing]',
+    #   line: 'Include = /etc/pacman.d/mirrorlist'}
+    #- {after: '[multilib-testing]',
+    #   line: 'Include = /etc/pacman.d/mirrorlist'}
+  when: ansible_distribution == 'ArchLinux'
+
+- name: Ensure pacman cache is up to date
+  pacman:
+    update_cache: true
+  when: ansible_distribution == 'ArchLinux'

@@ -1,0 +1,35 @@
+---
+# Task files for arc.desktop_env.xfce
+- name: Install xfce on apt hosts
+  apt:
+    name:
+      - xfce4
+      - xfce4-goodies
+    state: present
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Install xfce on yum systems
+  yum:
+    name: xfce4
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Install xfce on dnf systems
+  dnf:
+    name: '@Xfce'
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'dnf'
+
+- name: Install xfce on pacman systems
+  pacman:
+    name:
+      - xfce4
+      - xfce4-goodies
+      - lightdm
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'

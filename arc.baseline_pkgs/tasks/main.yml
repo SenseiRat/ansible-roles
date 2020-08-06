@@ -2,7 +2,7 @@
 # tasks file for arc.baseline_pkgs
 - name: Install base packages for Arch
   import_tasks: arch.yml
-  when: ansible_distribution == 'ArchLinux'
+  when: ansible_distribution == 'Archlinux'
 
 - name: Install base packages for CentOS
   import_tasks: centos.yml

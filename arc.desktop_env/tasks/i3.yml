@@ -1,0 +1,56 @@
+---
+# Task files for arc.desktop_env.i3
+# Note: there is no install for DNF here because i3 is not supported
+# in the latest CentOS or EPEL repos for some ungodly reason.  That was
+# such a waste of time...
+- name: Install i3 on apt hosts
+  apt:
+    name:
+      - lightdm
+      #- libwxgtk3.0-0v5
+      - lxappearance
+      - thunar
+      - arc-theme
+      - moka-icon-theme
+      - i3blocks
+      - i3
+      - xorg
+      - suckless-tools
+    state: present
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Install i3 on yum systems
+  yum:
+    name:
+     - lightdm
+     #- libwxgtk3.0-0v5
+     - lxappearance
+     - thunar
+     - arc-theme
+     - moka-icon-theme
+     - i3blocks
+     - i3
+     - xorg
+     - suckless-tools
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Install i3 on pacman systems
+  pacman:
+    name:
+      - lightdm
+      #- libwxgtk3.0-0v5
+      - lxappearance
+      - thunar
+      - arc-theme
+      - moka-icon-theme
+      - i3blocks
+      - i3
+      - xorg
+      - suckless-tools
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'

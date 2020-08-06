@@ -45,12 +45,12 @@
       #- libwxgtk3.0-0v5
       - lxappearance
       - thunar
-      - arc-theme
+      #- arc-theme
       - moka-icon-theme
       - i3blocks
       - i3
       - xorg
-      - suckless-tools
+      #- suckless-tools
     state: latest
     update_cache: true
   when: ansible_pkg_mgr == 'pacman'

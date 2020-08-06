@@ -31,9 +31,9 @@
     #   line: 'Include = /etc/pacman.d/mirrorlist'}
     #- {after: '[multilib-testing]',
     #   line: 'Include = /etc/pacman.d/mirrorlist'}
-  when: ansible_distribution == 'ArchLinux'
+  when: ansible_distribution == 'Archlinux'
 
 - name: Ensure pacman cache is up to date
   pacman:
     update_cache: true
-  when: ansible_distribution == 'ArchLinux'
+  when: ansible_distribution == 'Archlinux'

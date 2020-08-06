@@ -1,0 +1,17 @@
+---
+# tasks file for arc.baseline_cfgs
+- name: Baseline config changes for Arch
+  import_tasks: arch.yml
+  when: ansible_distribution == 'ArchLinux'
+
+- name: Baseline config changes for CentOS
+  import_tasks: centos.yml
+  when: ansible_distribution == 'CentOS'
+
+- name: Baseline config changes for Debian
+  import_tasks: debian.yml
+  when: ansible_distribution == 'Debian'
+
+- name: Baseline config changes for Ubuntu
+  import_tasks: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'

@@ -19,6 +19,12 @@
     insertafter: "{{ item.after }}"
     line: "{{ item.line }}"
   loop:
+    - {after: '[core]',
+       line: 'Include = /etc/pacman.d/mirrorlist'}
+    - {after: '[extra]',
+       line: 'Include = /etc/pacman.d/mirrorlist'}
+    - {after: '[community]',
+       line: 'Include = /etc/pacman.d/mirrorlist'}
     - {after: '[multilib]',
        line: 'Include = /etc/pacman.d/mirrorlist'}
     #- {after: '[community-testing]',

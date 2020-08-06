@@ -1,0 +1,6 @@
+---
+- name: Ensure nameserver is set in Archlinux
+  lineinfile:
+    path: '/etc/resolv.conf'
+    line: "nameserver {{ item }}"
+  loop: "{{ local_dns }}"

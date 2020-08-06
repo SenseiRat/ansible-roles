@@ -2,7 +2,7 @@
 # tasks file for arc.baseline_cfgs
 - name: Baseline config changes for Arch
   import_tasks: arch.yml
-  when: ansible_distribution == 'ArchLinux'
+  when: ansible_distribution == 'Archlinux'
 
 - name: Baseline config changes for CentOS
   import_tasks: centos.yml

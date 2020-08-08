@@ -20,9 +20,9 @@
 #  import_tasks: mate.yml
 #  when: 'mate' in "{{ desktop_env }}"
 
-#- name: Install Budgie
-#  import_tasks: budgie.yml
-#  when: 'budgie' in "{{ desktop_env }}"
+- name: Install Budgie
+  import_tasks: budgie.yml
+  when: 'budgie' in "{{ desktop_env }}"
 
 #- name: Remove unspecified desktop environments
 #  import_tasks: remove_de.yml

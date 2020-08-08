@@ -1,0 +1,31 @@
+---
+# Task files for arc.desktop_env.gnome
+- name: Install budgie on Ubuntu hosts
+  apt:
+    name:
+      - ubuntu-budgie-desktop
+      - lightdm
+    state: present
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution == 'Ubuntu'
+
+- name: Install budgie on apt hosts
+  apt:
+    name:
+      - budgie-desktop
+      - budgie-indicator-applet
+    state: latest
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution != 'Ubuntu'
+
+- name: Install budgie on pacman systems
+  pacman:
+    name:
+      - budgie-desktop
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'

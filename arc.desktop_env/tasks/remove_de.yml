@@ -26,6 +26,13 @@
     state: 'absent'
   when: "'lightdm' not in desktop_mgr"
 
+- name: Remove additional lightdm packages from pacmans systems
+  pacman:
+    name: 'lightdm-deepin-greeter'
+    state: absent
+  when: "'lightdm' not in desktop_mgr" and
+        ansible_pkg_mgr == 'pacman'
+
 - name: Disable GDM if not in use
   service:
     name: 'gdm'

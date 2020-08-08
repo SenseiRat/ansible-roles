@@ -1,5 +1,7 @@
 ---
 # Task files for arc.desktop_env.kde
+# I removed KDE from yum because I have no way to test
+# without working on a system that use DNF
 - name: Install kde on Ubuntu hosts
   apt:
     # kde-full: includes all the things for KDE
@@ -20,16 +22,6 @@
     install_recommends: true
   when: ansible_pkg_mgr == 'apt' and
         ansible_distribution == 'Debian'
-
-- name: Install kde on yum systems
-  yum:
-    name: xfce4
-    state: latest
-    update_cache: true
-    enablerepo:
-      - epel
-      - PowerTools
-  when: ansible_pkg_mgr == 'yum'
 
 - name: Install kde on dnf systems
   dnf:

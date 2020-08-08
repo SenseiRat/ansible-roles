@@ -39,7 +39,6 @@
     name:
       - xfce4
       - xfce4-goodies
-      - lightdm
     state: latest
     update_cache: true
   when: ansible_pkg_mgr == 'pacman'

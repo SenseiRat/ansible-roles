@@ -6,7 +6,6 @@
 - name: Install i3 on apt hosts
   apt:
     name:
-      - lightdm
       #- libwxgtk3.0-0v5
       - lxappearance
       - thunar
@@ -24,7 +23,6 @@
 - name: Install i3 on yum systems
   yum:
     name:
-     - lightdm
      #- libwxgtk3.0-0v5
      - lxappearance
      - thunar
@@ -41,7 +39,6 @@
 - name: Install i3 on pacman systems
   pacman:
     name:
-      - lightdm
       #- libwxgtk3.0-0v5
       - lxappearance
       - thunar

@@ -6,9 +6,7 @@
 # any more
 - name: Install budgie on Ubuntu hosts
   apt:
-    name:
-      - ubuntu-budgie-desktop
-      - lightdm
+    name: ubuntu-budgie-desktop
     state: present
     update_cache: true
     install_recommends: true

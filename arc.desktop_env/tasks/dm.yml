@@ -1,0 +1,30 @@
+---
+# Run tasks to install a DM on all systems
+- name: Install DM on Ubuntu hosts
+  apt:
+    name: "{{ desktop_mgr }}"
+    state: latest
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Install DM on yum systems
+  yum:
+    name: "{{ desktop_mgr }}"
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Install DM on dnf systems
+  dnf:
+    name: "{{ desktop_mgr }}"
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'dnf'
+
+- name: Install DM on pacman systems
+  pacman:
+    name: "{{ desktop_mgr }}"
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'

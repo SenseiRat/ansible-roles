@@ -1,5 +1,8 @@
 ---
 # tasks file for arc.desktop_env
+- name: Ensure desktop manager is installed
+  import_tasks: dm.yml
+
 - name: Install Xfce
   import_tasks: xfce.yml
   when: "'xfce' in desktop_env"

@@ -4,9 +4,9 @@
   import_tasks: xfce.yml
   when: "'xfce' in desktop_env"
 
-#- name: Install Gnome
-#  import_tasks: gnome.yml
-#  when: 'gnome' in "{{ desktop_env }}"
+- name: Install Gnome
+  import_tasks: gnome.yml
+  when: "'gnome' in desktop_env"
 
 #- name: Install KDE
 #  import_tasks: kde.yml

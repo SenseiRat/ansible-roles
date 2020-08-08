@@ -1,5 +1,7 @@
 ---
 # Task files for arc.desktop_env.gnome
+# I remove yum because I have no system to test on that's not
+# a dnf system with a yum wrapper
 - name: Install gnome on apt hosts
   apt:
     name:
@@ -18,13 +20,6 @@
     install_recommends: true
   when: ansible_pkg_mgr == 'apt' and
         ansible_distribution == 'Debian'
-
-- name: Install gnome on yum systems
-  yum:
-    name: xfce4
-    state: latest
-    update_cache: true
-  when: ansible_pkg_mgr == 'yum'
 
 - name: Install Gnome on dnf systems
   dnf:

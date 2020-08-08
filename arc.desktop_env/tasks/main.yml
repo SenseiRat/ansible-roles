@@ -11,17 +11,17 @@
   import_tasks: gnome.yml
   when: "'gnome' in desktop_env"
 
-#- name: Install KDE
-#  import_tasks: kde.yml
-#  when: 'kde' in "{{ desktop_env }}"
+- name: Install KDE
+  import_tasks: kde.yml
+  when: 'kde' in "{{ desktop_env }}"
 
 - name: Install i3
   import_tasks: i3.yml
   when: "'i3' in desktop_env"
 
-#- name: Install MATE
-#  import_tasks: mate.yml
-#  when: 'mate' in "{{ desktop_env }}"
+- name: Install MATE
+  import_tasks: mate.yml
+  when: 'mate' in "{{ desktop_env }}"
 
 - name: Install Budgie
   import_tasks: budgie.yml

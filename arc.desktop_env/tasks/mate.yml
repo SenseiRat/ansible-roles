@@ -1,0 +1,29 @@
+---
+# Task files for arc.desktop_env.mate
+# MATE is not available for CentOS 8 at this time
+- name: Install MATE on Ubuntu hosts
+  apt:
+    name: ubuntu-mate-desktop
+    state: latest
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution != 'Debian'
+
+- name: Install MATE on Debian hosts
+  apt:
+    name: task-mate-desktop
+    state: latest
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution == 'Debian'
+
+- name: Install xfce on pacman systems
+  pacman:
+    name:
+      - mate
+      - mate-extra
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'

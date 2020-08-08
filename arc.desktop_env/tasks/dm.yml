@@ -28,3 +28,9 @@
     state: latest
     update_cache: true
   when: ansible_pkg_mgr == 'pacman'
+
+- name: Ensure DM service is enabled
+  service:
+    name: "{{ desktop_mgr }}"
+    state: started
+    enabled: true

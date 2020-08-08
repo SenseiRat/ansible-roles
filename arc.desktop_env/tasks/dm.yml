@@ -15,15 +15,15 @@
     update_cache: true
   when: ansible_pkg_mgr == 'yum'
 
-# TODO: Fix installing conflict with xorg/KDE on dnf systems
-#- name: Install DM on dnf systems
-#  dnf:
-#    name: "{{ desktop_mgr }}"
-#    state: latest
-#    update_cache: true
-#  when: ansible_pkg_mgr == 'dnf' and
-#        "'lightdm' is desktop_mgr"
-#  register: dnf_system
+- name: Install DM on dnf systems
+  dnf:
+    name: "{{ desktop_mgr }}"
+    state: latest
+    update_cache: true
+  when:
+    - ansible_pkg_mgr == 'dnf'
+    - desktop_mgr == 'lightdm'
+  register: dnf_system
 
 - name: Install DM on pacman systems
   pacman:
@@ -37,25 +37,30 @@
     name: 'lightdm-deepin-greeter'
     state: latest
     update_cache: true
-  when: ansible_pkg_mgr == 'pacman' and
-        desktop_mgr == 'lightdm'
+  when:
+    - ansible_pkg_mgr == 'pacman'
+    - desktop_mgr == 'lightdm'
 
 - name: Ensure DM service is enabled
   service:
-    name: "{{ desktop_mgr }}"
+    name: "{{ desktop_mgr[0] }}"
     state: started
     enabled: true
 
-#- name: Install DM on dnf systems if lightdm is selected
-#  dnf:
-#    name: 'gdm'
-#    state: latest
-#    update_cache: true
-#  when: dnf_system is skippped
+- name: Install DM on dnf systems if lightdm is selected
+  dnf:
+    name: 'gdm'
+    state: latest
+    update_cache: true
+  when:
+    - ansible_pkg_mgr == 'dnf'
+    - dnf_system.skipped
 
-#- name: Ensure service is started if lightdm is selected for dnf system
-#  service:
-#    name: 'gdm'
-#    state: started
-#    enabled: true
-#  when: dnf_system is skipped
+- name: Ensure service is started if lightdm is selected for dnf system
+  service:
+    name: 'gdm'
+    state: started
+    enabled: true
+  when:
+     - ansible_pkg_mgr == 'dnf'
+     - dnf_system.skipped

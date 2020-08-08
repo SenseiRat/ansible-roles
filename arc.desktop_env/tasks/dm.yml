@@ -15,12 +15,15 @@
     update_cache: true
   when: ansible_pkg_mgr == 'yum'
 
-- name: Install DM on dnf systems
-  dnf:
-    name: "{{ desktop_mgr }}"
-    state: latest
-    update_cache: true
-  when: ansible_pkg_mgr == 'dnf'
+# TODO: Fix installing conflict with xorg/KDE on dnf systems
+#- name: Install DM on dnf systems
+#  dnf:
+#    name: "{{ desktop_mgr }}"
+#    state: latest
+#    update_cache: true
+#  when: ansible_pkg_mgr == 'dnf' and
+#        "'lightdm' is desktop_mgr"
+#  register: dnf_system
 
 - name: Install DM on pacman systems
   pacman:
@@ -29,8 +32,30 @@
     update_cache: true
   when: ansible_pkg_mgr == 'pacman'
 
+- name: Ensure greeter is installed on pacman systems if lightdm
+  pacman:
+    name: 'lightdm-deepin-greeter'
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman' and
+        desktop_mgr == 'lightdm'
+
 - name: Ensure DM service is enabled
   service:
     name: "{{ desktop_mgr }}"
     state: started
     enabled: true
+
+#- name: Install DM on dnf systems if lightdm is selected
+#  dnf:
+#    name: 'gdm'
+#    state: latest
+#    update_cache: true
+#  when: dnf_system is skippped
+
+#- name: Ensure service is started if lightdm is selected for dnf system
+#  service:
+#    name: 'gdm'
+#    state: started
+#    enabled: true
+#  when: dnf_system is skipped

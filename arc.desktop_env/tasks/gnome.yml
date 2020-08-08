@@ -1,0 +1,43 @@
+---
+# Task files for arc.desktop_env.gnome
+- name: Install gnome on apt hosts
+  apt:
+    name:
+      - gnome
+    state: present
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution != 'Debian'
+
+- name: Install xfce on Debian hosts
+  apt:
+    name: task-gnome-desktop
+    state: latest
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution == 'Debian'
+
+- name: Install xfce on yum systems
+  yum:
+    name: xfce4
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Install Gnome on dnf systems
+  dnf:
+    name: '@GNOME'
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'dnf'
+
+- name: Install Gnome on pacman systems
+  pacman:
+    name:
+      - gnome
+      - gnome-extra
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'

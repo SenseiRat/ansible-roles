@@ -15,7 +15,7 @@
       - i3
       - xorg
       - suckless-tools
-    state: present
+    state: latest
     update_cache: true
     install_recommends: true
   when: ansible_pkg_mgr == 'apt'

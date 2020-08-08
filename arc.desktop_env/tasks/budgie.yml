@@ -1,5 +1,9 @@
 ---
-# Task files for arc.desktop_env.gnome
+# Task files for arc.desktop_env.budgie
+# I also couldn't find a way to install Budgie in yum/dnf systems currently
+# This is something I'll have to come back too; there was an old repo for it
+# in earlier versions of CentOS/RHEL, but it doesn't seem like it's supported
+# any more
 - name: Install budgie on Ubuntu hosts
   apt:
     name:

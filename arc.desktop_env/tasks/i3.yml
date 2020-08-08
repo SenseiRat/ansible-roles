@@ -6,7 +6,6 @@
 - name: Install i3 on apt hosts
   apt:
     name:
-      #- libwxgtk3.0-0v5
       - lxappearance
       - thunar
       - arc-theme
@@ -23,7 +22,6 @@
 - name: Install i3 on yum systems
   yum:
     name:
-     #- libwxgtk3.0-0v5
      - lxappearance
      - thunar
      - arc-theme
@@ -39,15 +37,12 @@
 - name: Install i3 on pacman systems
   pacman:
     name:
-      #- libwxgtk3.0-0v5
       - lxappearance
       - thunar
-      #- arc-theme
       - moka-icon-theme
       - i3blocks
       - i3
       - xorg
-      #- suckless-tools
     state: latest
     update_cache: true
   when: ansible_pkg_mgr == 'pacman'

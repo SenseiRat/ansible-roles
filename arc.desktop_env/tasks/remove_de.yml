@@ -1,0 +1,243 @@
+---
+# Tasks for arc.desktop_env.remove_de
+- name: Disable SDDM if not in use
+  service:
+    name: 'sddm'
+    state: stopped
+    enabled: false
+  when: "'sddm' not in desktop_mgr"
+
+- name: Remove SDDM from systems when not in use
+  package:
+    name: 'sddm'
+    state: 'absent'
+  when: "'sddm' not in desktop_mgr"
+
+- name: Disable LightDM if not in use
+  service:
+    name: 'lightdm'
+    state: stopped
+    enabled: false
+  when: "'lightdm' not in desktop_mgr"
+
+- name: Remove LightDM from systems when not in use
+  package:
+    name: 'lightdm'
+    state: 'absent'
+  when: "'lightdm' not in desktop_mgr"
+
+- name: Disable GDM if not in use
+  service:
+    name: 'gdm'
+    state: stopped
+    enabled: false
+  when: "'gdm' not in desktop_mgr"
+
+- name: Remove GDM from systems when not in use
+  package:
+    name: 'gdm'
+    state: 'absent'
+  when: "'gdm' not in desktop_mgr"
+
+- name: Remove Budgie if not in use on ubuntu systems
+  apt:
+    name: ubuntu-budgie-desktop
+    state: absent
+    autoremove: true
+  when: ansible_distribution == 'Ubuntu' and
+        "'budgie' not in desktop_env"
+
+- name: Remove budgie if not in use on apt systems
+  apt:
+    name:
+      - budgie-desktop
+      - budgie-indicator-applet
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution != 'Ubuntu' and
+        "'budgie' not in desktop_env"
+
+- name: Remove budgie if not in use on pacman systems
+  pacman:
+    name: budgie-desktop
+    state: absent
+  when: ansible_pkg_mgr == 'pacman' and
+        "'budgie' not in desktop_env"
+
+- name: Remove Gnome if not in use on apt systems
+  apt:
+    name: gnome
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution != 'Debian' and
+        "'gnome' not in desktop_env"
+
+- name: Remove Gnome if not in use on Debian systems
+  apt:
+    name: task-gnome-desktop
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution == 'Debian' and
+        "'gnome' not in desktop_env"
+
+- name: Remove Gnome if not in use on dnf systems
+  dnf:
+    name: '@GNOME'
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'dnf' and
+        "'gnome' not in desktop_env"
+
+- name: Remove Gnome if not in use on pacman systems
+  pacman:
+    name:
+      - gnome
+      - gnome-extra
+    state: absent
+  when: ansible_pkg_mgr == 'pacman' and
+        "'gnome' not in desktop_env"
+
+- name: Remove i3 if not in use on apt hosts
+  apt:
+    name:
+      - lxappearance
+      - i3blocks
+      - i3
+      - suckless-tools
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'apt' and
+        "'i3' not in desktop_env"
+
+- name: Remove i3 if not in use on yum hosts
+  yum:
+    name:
+     - lxappearance
+     - i3blocks
+     - i3
+     - suckless-tools
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'yum' and
+        "'i3' not in desktop_env"
+
+- name: Remove i3 if not in use on pacman systems
+  pacman:
+    name:
+      - lxappearance
+      - i3blocks
+      - i3
+    state: absent
+  when: ansible_pkg_mgr == 'pacman' and
+        "'i3' not in desktop_env"
+
+- name: Remove KDE if not in use on apt hosts
+  apt:
+    name:
+      - kde-full
+      - kde-standard
+      - kde-plasma-desktop
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution != 'Debian' and
+        "'kde' not in desktop_env"
+
+- name: Remove KDE if not in use on Debian hosts
+  apt:
+    name: task-kde-desktop
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution == 'Debian' and
+        "'kde' not in desktop_env"
+
+- name: Remove KDE if not in use on dnf hosts
+  dnf:
+    name: '@KDE Plasma Workspaces'
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'dnf' and
+        "'kde' not in desktop_env"
+
+- name: Remove KDE if not in use on pacman hosts
+  pacman:
+    name: plasma
+    state: absent
+  when: ansible_pkg_mgr == 'pacman' and
+        "'kde' not in desktop_env"
+
+- name: Remove MATE if not in use on Ubuntu hosts
+  apt:
+    name: ubuntu-mate-desktop
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution == 'Ubuntu' and
+        "'mate' not in desktop_env"
+
+- name: Remove MATE if not in use on Debian hosts
+  apt:
+    name: task-mate-desktop
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution == 'Debian' and
+        "'mate' not in desktop_env"
+
+- name: Remove MATE if not in use on pacman systems
+  pacman:
+    name:
+      - mate
+      - mate-extra
+    state: absent
+  when: ansible_pkg_mgr == 'pacman' and
+        "'mate' not in desktop_env"
+
+- name: Remove XFCE if not in use on apt hosts
+  apt:
+    name:
+      - xfce4
+      - xfce4-goodies
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution != 'Debian' and
+        "'xfce' not in desktop_env"
+
+- name: Remove XFCE if not in use on Debian hosts
+  apt:
+    name: task-xfce-desktop
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution == 'Debian' and
+        "'xfce' not in desktop_env"
+
+- name: Remove XFCE if not in use on yum hosts
+  yum:
+    name: xfce4
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'yum' and
+        "'xfce' not in desktop_env"
+
+- name: Remove XFCE if not in use on dnf hosts
+  dnf:
+    name: '@Xfce'
+    state: absent
+    autoremove: true
+  when: ansible_pkg_mgr == 'dnf' and
+        "'xfce' not in desktop_env"
+
+- name: Remove XFCE if not in use on pacman hosts
+  pacman:
+    name:
+      - xfce4
+      - xfce4-goodies
+    state: absent
+  when: ansible_pkg_mgr == 'pacman' and
+        "'xfce' not in desktop_env"

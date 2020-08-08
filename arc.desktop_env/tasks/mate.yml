@@ -8,7 +8,7 @@
     update_cache: true
     install_recommends: true
   when: ansible_pkg_mgr == 'apt' and
-        ansible_distribution != 'Debian'
+        ansible_distribution == 'Ubuntu'
 
 - name: Install MATE on Debian hosts
   apt:

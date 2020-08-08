@@ -1,0 +1,47 @@
+---
+# Task files for arc.desktop_env.kde
+- name: Install kde on Ubuntu hosts
+  apt:
+    # kde-full: includes all the things for KDE
+    # kde-standard: includes the standard KDE apps
+    # kde-plasma-desktop: just KDE
+    name: kde-standard
+    state: latest
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution != 'Debian'
+
+- name: Install kde on Debian hosts
+  apt:
+    name: task-kde-desktop
+    state: latest
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution == 'Debian'
+
+- name: Install kde on yum systems
+  yum:
+    name: xfce4
+    state: latest
+    update_cache: true
+    enablerepo:
+      - epel
+      - PowerTools
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Install kde on dnf systems
+  dnf:
+    name: '@KDE Plasma Workspaces'
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'dnf'
+
+- name: Install kde on pacman systems
+  pacman:
+    name:
+      - plasma
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'

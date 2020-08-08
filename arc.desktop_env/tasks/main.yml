@@ -27,5 +27,5 @@
   import_tasks: budgie.yml
   when: "'budgie' in desktop_env"
 
-#- name: Remove unspecified desktop environments
-#  import_tasks: remove_de.yml
+- name: Remove unspecified desktop environments
+  import_tasks: remove_de.yml

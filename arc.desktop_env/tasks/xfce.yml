@@ -1,14 +1,24 @@
 ---
 # Task files for arc.desktop_env.xfce
-- name: Install xfce on apt hosts
+- name: Install xfce on Ubuntu hosts
   apt:
     name:
       - xfce4
       - xfce4-goodies
-    state: present
+    state: latest
     update_cache: true
     install_recommends: true
-  when: ansible_pkg_mgr == 'apt'
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution != 'Debian'
+
+- name: Install xfce on Debian hosts
+  apt:
+    name: task-xfce-desktop
+    state: latest
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt' and
+        ansible_distribution == 'Debian'
 
 - name: Install xfce on yum systems
   yum:

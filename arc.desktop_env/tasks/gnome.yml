@@ -10,7 +10,7 @@
   when: ansible_pkg_mgr == 'apt' and
         ansible_distribution != 'Debian'
 
-- name: Install xfce on Debian hosts
+- name: Install gnome on Debian hosts
   apt:
     name: task-gnome-desktop
     state: latest
@@ -19,7 +19,7 @@
   when: ansible_pkg_mgr == 'apt' and
         ansible_distribution == 'Debian'
 
-- name: Install xfce on yum systems
+- name: Install gnome on yum systems
   yum:
     name: xfce4
     state: latest

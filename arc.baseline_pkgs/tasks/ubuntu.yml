@@ -1,1 +1,7 @@
 ---
+# Tasks to be performed on Arch systems
+- name: Install base packages for Ubuntu Linux
+  pacman:
+    name: "{{ ubuntu_packages }}"
+    state: latest
+    update_cache: true

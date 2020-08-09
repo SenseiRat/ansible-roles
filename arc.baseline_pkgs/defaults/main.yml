@@ -2,9 +2,118 @@
 # defaults file for arc.baseline_pkgs
 arch_packages:
   - base-devel
+  - python3
+  - python3-pip
+  - python3-docker
+  - make
+  - tree
+  - htop
+  - curl
+  - wget
+  - gnupg2
+  - autoconf
+  - automake
+  - thefuck
 
-# centos_packages:
+centos_packages:
+  - python3
+  - python3-pip
+  - python3-docker
+  - make
+  - tree
+  - htop
+  - curl
+  - wget
+  - gnupg2
+  - autoconf
+  - automake
+  - thefuck
 
-# debian_packages:
 
-# ubuntu_packages:
+debian_packages:
+  - python3
+  - python3-pip
+  - python3-docker
+  - make
+  - tree
+  - htop
+  - curl
+  - wget
+  - gnupg2
+  - autoconf
+  - automake
+  - thefuck
+  - libxcb1-dev
+  - libxcb-keysyms1-dev
+  - libpango1.0-dev
+  - libxcb-util0-dev
+  - libxcb-icccm4-dev
+  - libyajl-dev
+  - libstartup-notification0-dev
+  - libxcb-randr0-dev
+  - libev-dev
+  - libxcb-cursor-dev
+  - libxcb-xinerama0-dev
+  - libxcb-xkb-dev
+  - libxkbcommon-x11-dev
+  - xutils-dev
+  - libtool
+  - libxcb-xrm-dev
+  - libxcb-shape0
+  - libxcb-shape0-dev
+  - amd64-microcode
+  - alsa-utils
+  - alsa-tools
+  - alsa-oss
+  - libasound2
+  - libasound2-doc
+  - linux-headers-amd64
+  - dialog
+  - snapd
+  - apt-transport-https
+  - ca-certificates
+  - software-properties-common
+
+ubuntu_packages:
+  - python3
+  - python3-pip
+  - python3-docker
+  - make
+  - tree
+  - htop
+  - curl
+  - wget
+  - gnupg2
+  - autoconf
+  - automake
+  - thefuck
+  - libxcb1-dev
+  - libxcb-keysyms1-dev
+  - libpango1.0-dev
+  - libxcb-util0-dev
+  - libxcb-icccm4-dev
+  - libyajl-dev
+  - libstartup-notification0-dev
+  - libxcb-randr0-dev
+  - libev-dev
+  - libxcb-cursor-dev
+  - libxcb-xinerama0-dev
+  - libxcb-xkb-dev
+  - libxkbcommon-x11-dev
+  - xutils-dev
+  - libtool
+  - libxcb-xrm-dev
+  - libxcb-shape0
+  - libxcb-shape0-dev
+  - amd64-microcode
+  - alsa-utils
+  - alsa-tools
+  - alsa-oss
+  - libasound2
+  - libasound2-doc
+  - linux-headers-amd64
+  - dialog
+  - snapd
+  - apt-transport-https
+  - ca-certificates
+  - software-properties-common

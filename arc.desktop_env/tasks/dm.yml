@@ -7,6 +7,7 @@
     update_cache: true
     install_recommends: true
   when: ansible_pkg_mgr == 'apt'
+  register: dm_service
 
 - name: Install DM on yum systems
   yum:
@@ -14,6 +15,7 @@
     state: latest
     update_cache: true
   when: ansible_pkg_mgr == 'yum'
+  register: dm_service
 
 - name: Install DM on dnf systems
   dnf:
@@ -31,6 +33,7 @@
     state: latest
     update_cache: true
   when: ansible_pkg_mgr == 'pacman'
+  register: dm_service
 
 - name: Ensure greeter is installed on pacman systems if lightdm
   pacman:
@@ -46,6 +49,7 @@
     name: "{{ desktop_mgr[0] }}"
     state: started
     enabled: true
+  when: dm_service.changed or dnf_system.changed
 
 - name: Install DM on dnf systems if lightdm is selected
   dnf:

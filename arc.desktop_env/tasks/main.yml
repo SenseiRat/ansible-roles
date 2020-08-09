@@ -2,6 +2,7 @@
 # tasks file for arc.desktop_env
 - name: Ensure desktop manager is installed
   import_tasks: dm.yml
+  when: "'none' not in desktop_mgr"
 
 - name: Install Xfce
   import_tasks: xfce.yml
@@ -29,3 +30,6 @@
 
 - name: Remove unspecified desktop environments
   import_tasks: remove_de.yml
+
+#- name: Deploy configuration files
+#  import_tasks: configs.yml

@@ -20,7 +20,7 @@ elif [[ $1 == "run" ]]; then
     ansible-playbook -i $HOSTS $PLAYBOOK --key-file $KEYFILE
     exit 0
 elif [[ $1 == "stop" ]]; then
-    sudo kill $(ps aux | grep -i 'vmplayer' | grep -v 'grep' | awk '{ print $2 }')
+    sudo kill -9 $(ps aux | grep -i 'vmplayer' | grep -v 'grep' | awk '{ print $2 }')
     exit 0
 else
     echo "Usage: $0 (setup|check|run|stop)"

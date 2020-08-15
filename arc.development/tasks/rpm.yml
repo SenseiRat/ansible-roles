@@ -1,0 +1,54 @@
+---
+- name: Install DBeaver on RPM hosts
+  dnf:
+    name: https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
+    state: present
+
+- name: Install Remmina on RPM hosts
+  dnf:
+    name: remmina*
+    install_reccomends: true
+    update_cache: true
+
+- name: Install Atom on RPM hosts
+  dnf:
+    name: atom
+    state: latest
+    install_reccomends: true
+    update_cache: true
+  when: "'atom' in text_editor"
+
+- name: Install Sublime Text on RPM hosts
+  dnf:
+    name: sublime-text
+    state: latest
+    install_reccomends: true
+    update_cache: true
+  when: "'sublime' in text_editor"
+
+- name: Ensure IntelliJ directory exists on RPM hosts
+  file:
+    path: /opt/intellij
+    state: directory
+  when: "'intellij' in ide"
+
+- name: Install IntelliJ on RPM hosts
+  unarchive:
+    src: https://download.jetbrains.com/idea/ideaIC-2020.2.tar.gz
+    dest: /opt/intellij
+    remote_src: true
+  when: "'intellij' in ide"
+
+- name: Ensure IntelliJ is linked in path
+  file:
+    src: /opt/intellij/ideaIC-2020.2/bin/idea
+    dest: /usr/bin/idea
+    state: link
+  when: "'intellij' in ide"
+
+- name: Install VSCode on RPM hosts
+  dnf:
+    name: code
+    install_reccomends: true
+    update_cache: true
+  when: "'vscode' in ide"

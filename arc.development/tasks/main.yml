@@ -1,0 +1,13 @@
+---
+# tasks file for arc.development
+- name: Install development tools on dnf systems
+  includes_tasks: rpm.yml
+  when: ansible_pkg_mgr == 'dnf'
+
+- name: Install development tools on apt systems
+  include_tasks: deb.yml
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Install development tools on pacman systems
+  include_tasks: pacman.yml
+  when: ansible_pkg_mgr == 'pacman'

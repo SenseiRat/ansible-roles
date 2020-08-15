@@ -1,0 +1,30 @@
+---
+- name: Install management/dev tools on Arch hosts
+  snap:
+    name:
+      - dbeaver-ce
+      - remmina
+
+- name: Install Atom on Arch hosts
+  snap:
+    name: atom
+    classic: true
+  when: "'atom' in text_editor"
+
+- name: Install Sublime Text on Arch hosts
+  snap:
+    name: sublime-text
+    classic: true
+  when: "'sublime' in text_editor"
+
+- name: Install VSCode on Arch hosts
+  snap:
+    name: code
+    classic: true
+  when: "'vscode' in ide"
+
+- name: Install IntelliJ on Arch hosts
+  snap:
+    name: intellij-idea-community
+    classic: true
+  when: "'intellij' in ide"

@@ -1,0 +1,46 @@
+---
+- name: Install Remmina on Ubuntu hosts
+  snap:
+    name: remmina
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install Remmina on Debian hosts
+  apt:
+    name: remmina
+    state: latest
+    update_cache: true
+    install_recommends: true
+  when: ansible_distribution == 'Debian'
+
+- name: Install DBeaver on Apt hosts
+  apt:
+    deb: https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
+
+- name: Install Atom on Apt hosts
+  apt:
+    name: atom
+    state: latest
+    update_cache: true
+    install_reccomends: true
+  when: "'atom' in text_editor"
+
+- name: Install Sublime Text on Apt hosts
+  apt:
+    name: sublime-text
+    state: latest
+    update_cache: true
+    install_reccomends: true
+  when: "'sublime' in text_editor"
+
+- name: Install IntelliJ on Apt Hosts
+  apt:
+    name: intellij-idea-community
+    state: latest
+    update_cache: true
+    install_reccomends: true
+  when: "'intellij' in ide"
+
+- name: Install VSCode on Apt hosts
+  apt:
+    deb: https://go.microsoft.com/fwlink/?LinkID=760868
+  when: "'vscode' in ide"

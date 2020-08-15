@@ -21,3 +21,4 @@
     - {role: arc.sound, become: true}
     - {role: arc.tmux, become: true}
     - {role: arc.communication, become: true}
+    - {role: arc.development, become: true}

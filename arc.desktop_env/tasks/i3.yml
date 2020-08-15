@@ -48,3 +48,13 @@
     state: latest
     update_cache: true
   when: ansible_pkg_mgr == 'pacman'
+
+- name: Copy i3 config files
+  copy:
+    src: "{{ item.sr }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+  loop:
+    - {src: i3, dest: /home/"{{ admin_usr }}"/.config/i3}
+    - {src: wallpapers, dest: /home/"{{ admin_usr }}"/.config/i3/wallpapers}

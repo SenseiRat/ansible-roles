@@ -42,3 +42,13 @@
     state: latest
     update_cache: true
   when: ansible_pkg_mgr == 'pacman'
+
+- name: Copy xfce config files
+  copy:
+    src: "{{ item.sr }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+  loop:
+    - {src: xfce4, dest: /home/"{{ admin_usr }}"/.config/xfce4}
+    - {src: wallpapers, dest: /home/"{{ admin_usr }}"/.config/xfce4/wallpapers}

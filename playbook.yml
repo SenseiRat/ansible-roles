@@ -10,11 +10,12 @@
     - {role: arc.ansible_config, become: true}
     - {role: arc.user_creation, become: true}
     - {role: arc.remove_users, become: true}
-    #- {role: arc.ntp, become: true}
+    - {role: arc.ntp, become: true}
     - {role: arc.baseline_cfgs, become: true}
     - {role: arc.baseline_pkgs, become: true}
     - {role: arc.git, become: true}
     - {role: arc.enable_repos, become: true}                        # requires git, baseline
     - {role: arc.vim, become: true}                                 # requires git
     - {role: arc.bash_it, become: true}                             # requires git
-    #- {role: arc.desktop_env, become: true}                          # requires enable_repos
+    - {role: arc.desktop_env, become: true}                          # requires enable_repos
+    - {role: arc.sound, become: true}

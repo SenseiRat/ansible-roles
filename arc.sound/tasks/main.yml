@@ -6,4 +6,6 @@
     state: latest
     update_cache: true
     install_recommends: true
-  when: ansible_pkg_mgr == 'apt'
+  when:
+    - ansible_pkg_mgr == 'apt'
+    - sound_enabled == true

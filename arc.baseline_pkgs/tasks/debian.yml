@@ -6,3 +6,23 @@
     state: latest
     update_cache: true
     install_recommends: true
+
+- name: Install microcode for AMD CPUs
+  apt:
+    name:
+      - 'amd64-microcode'
+      - 'linux-headers-amd64'
+    state: present
+    update_cache: true
+    install_recommends: true
+  when: cpu == 'AMD'
+
+- name: Install microcode for Intel CPUs
+  apt:
+    name:
+      - 'intel-microcode'
+      - 'linux-headers-amd64'
+    state: present
+    update_cache: true
+    install_recommends: true
+  when: cpu == 'Intel'

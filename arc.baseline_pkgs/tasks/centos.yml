@@ -1,7 +1,7 @@
 ---
 # Tasks to be performed on Arch systems
 - name: Install base packages for CentOS Linux
-  pacman:
+  dnf:
     name: "{{ centos_packages }}"
     state: latest
     update_cache: true

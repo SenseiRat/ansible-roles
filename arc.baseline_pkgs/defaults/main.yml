@@ -3,14 +3,14 @@
 arch_packages:
   - base-devel
   - python3
-  - python3-pip
-  - python3-docker
+  #- python3-pip
+  #- python3-docker
   - make
   - tree
   - htop
   - curl
   - wget
-  - gnupg2
+  #- gnupg2
   - autoconf
   - automake
   - thefuck
@@ -18,7 +18,7 @@ arch_packages:
 centos_packages:
   - python3
   - python3-pip
-  - python3-docker
+  #- python3-docker
   - make
   - tree
   - htop
@@ -27,8 +27,6 @@ centos_packages:
   - gnupg2
   - autoconf
   - automake
-  - thefuck
-
 
 debian_packages:
   - python3
@@ -61,7 +59,7 @@ debian_packages:
   - libxcb-xrm-dev
   - libxcb-shape0
   - libxcb-shape0-dev
-  - amd64-microcode
+  #- amd64-microcode
   - alsa-utils
   - alsa-tools
   - alsa-oss
@@ -111,7 +109,7 @@ ubuntu_packages:
   - alsa-oss
   - libasound2
   - libasound2-doc
-  - linux-headers-amd64
+  #- linux-headers-amd64
   - dialog
   - snapd
   - apt-transport-https

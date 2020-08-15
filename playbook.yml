@@ -19,3 +19,4 @@
     - {role: arc.bash_it, become: true}                             # requires git
     - {role: arc.desktop_env, become: true}                          # requires enable_repos
     - {role: arc.sound, become: true}
+    - {role: arc.tmux, become: true}

@@ -1,0 +1,32 @@
+---
+# tasks file for arc.tmux
+- name: Install tmux on yum systems
+  yum:
+    name: tmux-enhanced
+    state: latest
+    update_cache: true
+    install_reccomends: true
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Install tmux on dnf systems
+  dnf:
+    name: tmux-enhanced
+    state: latest
+    update_cache: true
+    install_reccomends: true
+  when: ansible_pkg_mgr == 'dnf'
+
+- name: Install tmux on apt systems
+  apt:
+    name: tmux
+    state: latest
+    update_cache: true
+    install_reccomends: true
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Install tmux on pacman systems
+  pacman:
+    name: tmux
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'

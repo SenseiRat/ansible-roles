@@ -1,0 +1,9 @@
+---
+# tasks file for arc.sound
+- name: Install sound utilities on Apt systems
+  apt:
+    name: "{{ apt_packages }}"
+    state: latest
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt'

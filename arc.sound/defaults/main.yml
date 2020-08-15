@@ -1,0 +1,8 @@
+---
+# defaults file for arc.sound
+apt_packages:
+  - alsa-utils
+  - alsa-tools
+  - alsa-oss
+  - libasound2
+  - libasound2-doc

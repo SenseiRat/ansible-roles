@@ -15,3 +15,10 @@
 - name: Install base packages for Ubuntu
   import_tasks: ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
+
+- name: Copy htop config files to host
+  copy:
+    src: htop
+    dest: /home/"{{ admin_user }}"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"

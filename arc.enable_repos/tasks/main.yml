@@ -16,6 +16,7 @@
 
 - name: Enable repos on pacman systems
   lineinfile:
+    path: /etc/pacman.d/mirrorlist
     insertafter: "{{ item.after }}"
     line: "{{ item.line }}"
   loop:

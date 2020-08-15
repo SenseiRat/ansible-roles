@@ -14,6 +14,7 @@ arch_packages:
   - autoconf
   - automake
   - thefuck
+  - snapd
 
 centos_packages:
   - python3

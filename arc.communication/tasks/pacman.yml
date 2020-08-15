@@ -1,0 +1,23 @@
+---
+- name: Install Slack on Arch hosts
+  snap:
+    name: slack
+    classic: true
+
+- name: Install communication software
+  snap:
+    name:
+      - mattermost-desktop
+      - discord
+
+- name: Install Keybase on Arch hosts
+  snap:
+    name:
+      - keybase
+    channel: latest/edge
+
+- name: Install quassel
+  pacman:
+    name: quassel
+    state: latest
+    update_cache: true

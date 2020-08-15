@@ -1,9 +1,13 @@
 ---
 # tasks file for arc.communication
+- name: Install communication software for apt hosts
+  import_tasks: deb.yml
+  when: ansible_pkg_mgr == 'apt'
 
+- name: Install communication software for yum hosts
+  import_tasks: yum.yml
+  when: ansible_pkg_mgr == 'yum'
 
-# keybase
-# slack
-# discord
-# mattermost
-# IRC client
+- name: Install communication software for Arch hosts
+  import_tasks: pacman.yml
+  when: ansible_pkg_mgr == 'pacman'

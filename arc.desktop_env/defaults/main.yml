@@ -1,2 +1,61 @@
 ---
 # defaults file for arc.desktop_env
+apt_deps:
+  - libxcb-shape0
+  - libxcb-shape0-dev
+  - libxcb-cursor-dev
+  - libxcb-xinerama0-dev
+  - libxcb-xkb-dev
+  - libxkbcommon-x11-dev
+  - libxcb-xrm-dev
+  - xutils-dev
+  - libxcb-randr0-dev
+  - libxcb-util0-dev
+  - libxcb-icccm4-dev
+  - libxcb1-dev
+  - libxcb-keysyms1-dev
+
+yum_deps:
+  - libxcb-shape0
+  - libxcb-shape0-dev
+  - libxcb-cursor-dev
+  - libxcb-xinerama0-dev
+  - libxcb-xkb-dev
+  - libxkbcommon-x11-dev
+  - libxcb-xrm-dev
+  - xutils-dev
+  - libxcb-randr0-dev
+  - libxcb-util0-dev
+  - libxcb-icccm4-dev
+  - libxcb1-dev
+  - libxcb-keysyms1-dev
+
+dnf_deps:
+  - libxcb-shape0
+  - libxcb-shape0-dev
+  - libxcb-cursor-dev
+  - libxcb-xinerama0-dev
+  - libxcb-xkb-dev
+  - libxkbcommon-x11-dev
+  - libxcb-xrm-dev
+  - xutils-dev
+  - libxcb-randr0-dev
+  - libxcb-util0-dev
+  - libxcb-icccm4-dev
+  - libxcb1-dev
+  - libxcb-keysyms1-dev
+
+pacman_deps:
+  - libxcb-shape0
+  - libxcb-shape0-dev
+  - libxcb-cursor-dev
+  - libxcb-xinerama0-dev
+  - libxcb-xkb-dev
+  - libxkbcommon-x11-dev
+  - libxcb-xrm-dev
+  - xutils-dev
+  - libxcb-randr0-dev
+  - libxcb-util0-dev
+  - libxcb-icccm4-dev
+  - libxcb1-dev
+  - libxcb-keysyms1-dev

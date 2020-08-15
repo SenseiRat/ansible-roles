@@ -1,0 +1,31 @@
+---
+# Tasks for arc.desktop_env.depends
+- name: Install DM on Ubuntu hosts
+  apt:
+    name: "{{ apt_deps }}"
+    state: latest
+    update_cache: true
+    install_recommends: true
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Install DM on yum systems
+  yum:
+    name: "{{ yum_deps }}"
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Install DM on dnf systems
+  dnf:
+    name: "{{ dnf_deps }}"
+    state: latest
+    update_cache: true
+  when:
+    - ansible_pkg_mgr == 'dnf'
+
+- name: Install DM on pacman systems
+  pacman:
+    name: "{{ pacman_deps }}"
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'

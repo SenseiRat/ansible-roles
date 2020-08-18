@@ -1,0 +1,28 @@
+---
+# tasks file for arc.updates
+- name: Update all apt hosts
+  apt:
+    name: "*"
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Update all yum hosts
+  yum:
+    name: "*"
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Update all dnf hosts
+  dnf:
+    name: "*"
+    state: latest
+    update_cache: true
+  when: ansible_pkg_mgr == 'dnf'
+
+- name: Update all pacman hosts
+  pacman:
+    upgrade: true
+    update_cache: true
+  when: ansible_pkg_mgr == 'pacman'

@@ -5,7 +5,7 @@
   when: ansible_pkg_mgr == 'apt'
 
 - name: Install communication software for yum hosts
-  import_tasks: yum.yml
+  import_tasks: rpm.yml
   when: ansible_pkg_mgr == 'yum'
 
 - name: Install communication software for Arch hosts

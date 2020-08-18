@@ -21,7 +21,7 @@
     name: atom
     state: latest
     update_cache: true
-    install_reccomends: true
+    install_recommends: true
   when: "'atom' in text_editor"
 
 - name: Install Sublime Text on Apt hosts
@@ -29,7 +29,7 @@
     name: sublime-text
     state: latest
     update_cache: true
-    install_reccomends: true
+    install_recommends: true
   when: "'sublime' in text_editor"
 
 - name: Install IntelliJ on Apt Hosts
@@ -37,7 +37,7 @@
     name: intellij-idea-community
     state: latest
     update_cache: true
-    install_reccomends: true
+    install_recommends: true
   when: "'intellij' in ide"
 
 - name: Install VSCode on Apt hosts

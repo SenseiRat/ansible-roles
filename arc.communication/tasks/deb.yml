@@ -1,11 +1,12 @@
 ---
 - name: Install Communication software from the internet
   apt:
-    deb:
-      - "{{ slack_deb_url }}"
-      - "{{ discord_deb_url }}"
-      - "{{ keybase_deb_url }}"
-      - "{{ mattermost_deb_url }}"
+    deb: "{{ item }}"
+  loop:
+    - "{{ slack_deb_url }}"
+    - "{{ discord_deb_url }}"
+    - "{{ keybase_deb_url }}"
+    - "{{ mattermost_deb_url }}"
 
 - name: Install Communication software from repos
   apt:

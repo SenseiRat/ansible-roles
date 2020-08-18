@@ -5,3 +5,30 @@
     name: "{{ arch_packages }}"
     state: latest
     update_cache: true
+
+- name: Ensure directory for yay exists
+  file:
+    path: /opt/yay
+    state: directory
+    owner: "{{ service_user }}"
+    group: "{{ service_user }}"
+
+- name: Download yay script wrapper for installing from AUR
+  git:
+    repo: 'https://aur.archlinux.org/yay-git.git'
+    dest: /opt/yay
+    update: true
+    clone: true
+
+- name: Install and build yay
+  become: false
+  shell:
+    chdir: /opt/yay
+    cmd: makepkg -si --noconfirm
+    creates: /usr/bin/yay
+
+- name: Install snapd with yay on Arch systems
+  become: false
+  shell:
+    cmd: yay -S --noconfirm snapd
+    creates: /usr/bin/snap

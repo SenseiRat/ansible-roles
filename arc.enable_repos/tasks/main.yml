@@ -2,13 +2,16 @@
 # tasks file for arc.enable_repos
 - name: Add keys to yum/dnf systems
   rpm_key:
-    key:
-      - https://packagecloud.io/AtomEditor/atom/gpgkey
-      - https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+    key: "{{ item }}"
     state: present
+  when: ansible_pkg_mgr == 'yum' or
+        ansible_pkg_mgr == 'dnf'
+  loop:
+    - 'https://packagecloud.io/AtomEditor/atom/gpgkey'
+    - 'https://download.sublimetext.com/sublimehq-rpm-pub.gpg'
 
-- name: Enable repos on yum/dnf systems
-  yum_repo:
+- name: Enable repos on yum and dnf systems
+  yum_repository:
     name: "{{ item.name }}"
     description: "{{ item.desc }}"
     file: "{{ item.file }}"
@@ -16,12 +19,14 @@
   loop:
     - {name: sublime-text,
        desc: Sublime Text Repo,
-       file: sublime-text.repo,
-       baseurl: https://download.sublimetext.com/rpm/stable/x86_64/}
+       file: sublime-text,
+       baseurl: 'https://download.sublimetext.com/rpm/stable/x86_64/'}
     - {name: Atom Editor,
        desc: Atom Repo,
-       file: atom.repo,
-       baseurl: https://packagecloud.io/AtomEditor/atom/el/7/\$basearch}
+       file: atom,
+       baseurl: 'https://packagecloud.io/AtomEditor/atom/el/7/$basearch'}
+  when: ansible_pkg_mgr == 'yum' or
+        ansible_pkg_mgr == 'dnf'
 
 - name: Enable EPEL repo on yum systems
   yum:
@@ -70,12 +75,13 @@
 
 - name: Add keys for Debian/Ubuntu repos
   apt_key:
-    url:
-      - https://packagecloud.io/AtomEditor/atom/gpgkey
-      - https://s3.eu-central-1.amazonaws.com/jetbrains-ppa/0xA6E8698A.pub.asc
-      - https://download.sublimetext.com/sublimehq-pub.gpg
+    url: "{{ item }}"
     state: present
   when: ansible_pkg_mgr == 'apt'
+  loop:
+    - 'https://packagecloud.io/AtomEditor/atom/gpgkey'
+    - 'https://s3.eu-central-1.amazonaws.com/jetbrains-ppa/0xA6E8698A.pub.asc'
+    - 'https://download.sublimetext.com/sublimehq-pub.gpg'
 
 - name: Enable Debian/Ubuntu repos
   apt_repository:
@@ -83,10 +89,10 @@
     state: present
     filename: "{{ item.file }}"
   loop:
-    - {repo: deb http://jetbrains-ppa.s3-website.eu-central-1.amazonaws.com bionic main,
-       file: intellij.repo}
-    - {repo: deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main,
-       file: atom.repo}
-    - {repo: deb https://download.sublimetext.com/ apt/stable/,
-       file: sublime.repo}
+    - {repo: 'deb http://jetbrains-ppa.s3-website.eu-central-1.amazonaws.com bionic main',
+       file: 'intellij.repo'}
+    - {repo: 'deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main',
+       file: 'atom.repo'}
+    - {repo: 'deb https://download.sublimetext.com/ apt/stable/',
+       file: 'sublime.repo'}
   when: ansible_pkg_mgr == 'apt'
